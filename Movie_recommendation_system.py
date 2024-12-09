@@ -7,13 +7,13 @@ from sklearn.metrics.pairwise import cosine_similarity
 def load_data():
         first_csv = pd.read_csv('E:\\PYTHON PROJECTS\\movie recommendation\\Movies-DataSet.csv')
         second_csv = pd.read_csv('E:\\PYTHON PROJECTS\\movie recommendation\\dataset.csv')
-    second_csv['genre'] = second_csv['genre'].str.replace(',', ' ', regex=False)
+        second_csv['genre'] = second_csv['genre'].str.replace(',', ' ', regex=False)
         second_csv['tags'] = second_csv['genre'] + ' ' + second_csv['overview']
         first_csv = first_csv[['title', 'tags']]
         second_csv = second_csv[['title', 'tags']]
-    final_dataset = pd.concat([first_csv[['title', 'tags']], second_csv[['title', 'tags']]], ignore_index=True)
-    duplicate_removes = final_dataset.drop_duplicates(subset='title', keep='first')
-    return duplicate_removes
+        final_dataset = pd.concat([first_csv[['title', 'tags']], second_csv[['title', 'tags']]], ignore_index=True)
+        duplicate_removes = final_dataset.drop_duplicates(subset='title', keep='first')
+        return duplicate_removes
 
 def create_cosine_similarity(final_movie_recommendation_ds):
     final_movie_recommendation_ds['tags'] = final_movie_recommendation_ds['tags'].fillna('')
@@ -53,10 +53,10 @@ def fetch_movie_details(movie_name):
                     poster_path = movie.get('poster_path', '')
                     movie_id = movie.get('id', '')
                     title = movie.get('title', '')
-                rating = movie.get('vote_average', 'N/A') 
-                release_year = movie.get('release_date', '').split('-')[0] 
+                    rating = movie.get('vote_average', 'N/A') 
+                    release_year = movie.get('release_date', '').split('-')[0] 
 
-                if poster_path:
+            if poster_path:
                     poster_url = f"https://image.tmdb.org/t/p/w500{poster_path}"
                     return poster_url, movie_id, title, rating, release_year
             return None, None, None, None, None
@@ -279,3 +279,4 @@ def run_streamlit_app():
 
 if __name__ == "__main__":
     run_streamlit_app()
+
