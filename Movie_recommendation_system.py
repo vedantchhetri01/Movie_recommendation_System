@@ -5,8 +5,13 @@ import time
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 def load_data():
-        first_csv = pd.read_csv('E:\\PYTHON PROJECTS\\movie recommendation\\Movies-DataSet.csv')
-        second_csv = pd.read_csv('E:\\PYTHON PROJECTS\\movie recommendation\\dataset.csv')
+        first_csv_url = 'https://drive.google.com/uc?export=download&id=15elCzd5s7g0stJEfdhOoP0MVlimlub9s'  # Replace with your actual file ID
+        second_csv_url = 'https://drive.google.com/uc?export=download&id=10jYlEpq_rNPE5R0pCScZ-1slX-SBuvYH'  # Replace with your actual file ID
+
+        first_csv = pd.read_csv(first_csv_url)
+        second_csv = pd.read_csv(second_csv_url)
+      #  first_csv = pd.read_csv('E:\\PYTHON PROJECTS\\movie recommendation\\Movies-DataSet.csv')
+       # second_csv = pd.read_csv('E:\\PYTHON PROJECTS\\movie recommendation\\dataset.csv')
         second_csv['genre'] = second_csv['genre'].str.replace(',', ' ', regex=False)
         second_csv['tags'] = second_csv['genre'] + ' ' + second_csv['overview']
         first_csv = first_csv[['title', 'tags']]
